@@ -2,6 +2,8 @@ package com.mile.pc.mile.restoraunt.app.controller;
 
 import com.mile.pc.mile.restoraunt.app.dto_dao.SignUpDTO;
 import com.mile.pc.mile.restoraunt.app.security.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,7 +17,9 @@ import javax.validation.Valid;
 @RequestMapping("/security")
 final class SecurityController {
 
-	private final UserService userService;
+	@Lazy
+	@Autowired
+	private UserService userService;
 
   SecurityController(UserService userService) {
     this.userService = userService;

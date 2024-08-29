@@ -5,6 +5,8 @@ import com.mile.pc.mile.restoraunt.app.model.Role;
 import com.mile.pc.mile.restoraunt.app.model.User;
 import com.mile.pc.mile.restoraunt.app.repo.RoleRepository;
 import com.mile.pc.mile.restoraunt.app.repo.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,16 +23,15 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private final UserRepository userRepository;
-	private final RoleRepository roleRepository;
-	private final BCryptPasswordEncoder passwordEncoder;
-
-	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
-		super();
-		this.userRepository = userRepository;
-    this.roleRepository = roleRepository;
-    this.passwordEncoder = passwordEncoder;
-  }
+	@Lazy
+	@Autowired
+	private UserRepository userRepository;
+	@Lazy
+	@Autowired
+	private RoleRepository roleRepository;
+	@Lazy
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Override @Transactional
 	public void save(SignUpDTO registrationDto) {
